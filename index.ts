@@ -13,7 +13,7 @@ import fastifyStatic from "@fastify/static";
 import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import { build } from "astro";
 import Fastify from "fastify";
-import INConfig from "./config";
+import INConfig from "./config.ts";
 import { generateMaps, getClientScript, type ObfuscationMaps, transformCss, transformHtml, transformJs, ROUTES, ASSET_FOLDERS } from "./src/lib/obfuscate";
 
 let obfuscationMaps: ObfuscationMaps | null = null;
