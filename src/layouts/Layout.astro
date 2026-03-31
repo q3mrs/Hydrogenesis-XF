@@ -16,7 +16,21 @@ import { ClientRouter } from "astro:transitions";
     <ClientRouter />
     <script src="@/lib/global.ts"></script>
     <script is:inline src="/assets/js/analytics.js" defer></script>
-
+    <style is:global>
+    @font-face {
+      font-family: 'SF Pro Display';
+      src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff2') format('woff2');
+      font-weight: 400;
+    }
+    @font-face {
+      font-family: 'SF Pro Display';
+      src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff2') format('woff2');
+      font-weight: 700;
+    }
+    html {
+      font-family: 'SF Pro Display', sans-serif;
+    }
+  </style>
     <script>
       import { BareMuxConnection } from "@mercuryworkshop/bare-mux";
 
