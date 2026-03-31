@@ -4,28 +4,44 @@ import Layout from "@/layouts/Main.astro";
 ---
 
 <Layout>
-  <div class="flex-1 flex flex-col items-center justify-center px-4">
-    <h1 class="text-4xl md:text-6xl font-bold text-text tracking-tighter mb-10 uppercase">
-      Interstellar
-    </h1>
-    <p id="tagline" class="min-h-[1.25rem] mb-5 -mt-8 text-sm md:text-base text-text-secondary/80 tracking-wide leading-5 opacity-0 transition-opacity duration-150"></p>
+  <div 
+    class="relative flex-1 flex flex-col items-center justify-center px-4 bg-cover bg-center bg-no-repeat"
+    style="background-image: url('/main.png');"
+  >
+    
+    <div class="mb-10 -mt-12">
+      <img 
+        src="/splash.png" 
+        alt="Hydrogenesis Logo" 
+        class="h-24 md:h-32 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+      />
+    </div>
+
+    <p id="tagline" class="min-h-[1.25rem] mb-5 -mt-6 text-sm md:text-base text-text-secondary/80 tracking-wide leading-5 opacity-0 transition-opacity duration-150"></p>
 
     <div class="w-full max-w-xl">
-      <div class="relative">
+      <div class="relative group">
         <Search
-          class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary"
+          class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary group-focus-within:text-white transition-colors"
           strokeWidth={2}
         />
         <input
           id="search"
-          class="w-full h-12 pl-10 pr-4 rounded-[6px] bg-white/5 border border-white/10 text-sm text-text placeholder:text-text-placeholder focus:outline-none focus:border-white/25 focus:bg-white/[0.07]"
-          placeholder="Search or enter URL"
+          class="w-full h-12 pl-10 pr-4 rounded-[8px] bg-black/20 backdrop-blur-md border border-white/10 text-sm text-text placeholder:text-text-placeholder focus:outline-none focus:border-white/30 focus:bg-black/40 transition-all shadow-2xl"
+          placeholder="Search anything..."
           type="search"
           autocomplete="off"
           spellcheck="false"
         />
       </div>
     </div>
+
+    <div class="absolute bottom-6 right-8 flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-default select-none">
+       <div class="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]"></div>
+       <span class="text-[10px] uppercase tracking-[0.3em] text-white/80 font-light">System Online</span>
+    </div>
+
   </div>
 </Layout>
+
 <script src="@/lib/home.ts"></script>
