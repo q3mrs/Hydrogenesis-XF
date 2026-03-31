@@ -19,24 +19,24 @@ const navLinks = [
 <Layout>
   <nav
     id="default-nav"
-    class="fixed top-0 left-0 right-0 z-[99999] flex items-center justify-between px-5 py-3 bg-background/90 backdrop-blur-md border-b border-white/10"
+    class="fixed top-5 left-1/2 -translate-x-1/2 z-[99999] flex items-center justify-between px-6 py-2 w-[90%] max-w-5xl rounded-full bg-black/15 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300 hover:bg-black/25"
   >
     <a
       href="/"
-      class="text-3xl font-bold text-text hover:text-accent transition-colors tracking-tighter"
+      class="text-2xl font-black text-white hover:text-cyan-400 transition-colors tracking-tighter select-none"
     >
       IN
     </a>
 
-    <div id="nav-links" class="hidden items-center gap-2">
+    <div id="nav-links" class="hidden items-center gap-6">
       {
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="inline-flex items-center gap-2 rounded px-3 py-1.5 text-sm text-text-secondary hover:text-text hover:bg-white/10 transition-all"
+            class="group inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all"
           >
-            <link.Icon class="w-4 h-4" strokeWidth={1.5} />
-            <span>{link.text}</span>
+            <link.Icon class="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 group-hover:text-cyan-400 transition-all" strokeWidth={2} />
+            <span class="font-medium">{link.text}</span>
           </a>
         ))
       }
@@ -44,38 +44,39 @@ const navLinks = [
 
     <button
       id="menu-toggle"
-      class="p-2 text-text-secondary hover:text-text transition-colors"
+      class="p-2 text-white/70 hover:text-white transition-colors"
       aria-label="Toggle menu"
     >
-      <Menu id="menu-icon" class="w-6 h-6 transition-transform duration-200" strokeWidth={1.5} />
-      <X id="close-icon" class="w-6 h-6 hidden transition-transform duration-200" strokeWidth={1.5} />
+      <Menu id="menu-icon" class="w-5 h-5 transition-transform duration-200" strokeWidth={2} />
+      <X id="close-icon" class="w-5 h-5 hidden transition-transform duration-200" strokeWidth={2} />
     </button>
   </nav>
 
   <div
     id="nav-menu"
-    class="fixed top-14 right-4 z-[99998] min-w-[180px] bg-background/95 backdrop-blur-sm border border-white/10 p-2 shadow-2xl origin-top-right transition-all duration-200 ease-out opacity-0 scale-95 pointer-events-none"
+    class="fixed top-20 right-[5%] z-[99998] min-w-[200px] bg-black/40 backdrop-blur-2xl border border-white/10 p-2 rounded-2xl shadow-2xl origin-top-right transition-all duration-300 ease-out opacity-0 scale-95 pointer-events-none"
   >
     {
       navLinks.map((link, i) => (
         <a
           href={link.href}
-          class="menu-item flex items-center gap-3 px-3 py-2.5 text-text-secondary hover:text-text hover:bg-white/10 transition-all duration-150"
-          style={`transition-delay: ${i * 30}ms;`}
+          class="menu-item flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:text-white hover:bg-white/5 transition-all duration-150"
+          style={`transition-delay: ${i * 40}ms;`}
         >
-          <link.Icon class="w-4 h-4" strokeWidth={1.5} />
-          <span class="text-sm">{link.text}</span>
+          <link.Icon class="w-4 h-4 text-cyan-400" strokeWidth={2} />
+          <span class="text-xs uppercase tracking-widest font-medium">{link.text}</span>
         </a>
       ))
     }
   </div>
 
-  <main class="flex flex-col min-h-screen pt-14">
+  <main class="flex flex-col min-h-screen">
     <slot />
   </main>
 </Layout>
 
 <style>
+  /* Menu Animasyonları */
   #nav-menu.open {
     opacity: 1;
     transform: scale(1);
@@ -84,18 +85,29 @@ const navLinks = [
 
   #nav-menu .menu-item {
     opacity: 0;
-    transform: translateX(10px);
+    transform: translateY(10px);
   }
 
   #nav-menu.open .menu-item {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
+  }
+
+  /* Sayfa geçişlerinde pürüzsüzlük */
+  main {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 </style>
 
 <script>
+  // Script kısmını olduğu gibi bıraktım, sadece sayfa yüklendiğinde çalışacak şekilde korundu
   function getId(name: string): string {
-    const codeMap = (window as Window & { _2?: Record<string, string> })._2;
+    const codeMap = (window as any)._2;
     return codeMap?.[name] ?? name;
   }
 
@@ -111,14 +123,15 @@ const navLinks = [
 
     if (navStyle === "inline") {
       links?.classList.remove("hidden");
+      links?.classList.add("flex");
       toggle.classList.add("hidden");
       menu.classList.remove("open");
-      menu.classList.add("hidden");
       return;
     }
 
     links?.classList.add("hidden");
-    menu.classList.remove("hidden");
+    links?.classList.remove("flex");
+    toggle.classList.remove("hidden");
 
     const open = () => {
       menu.classList.add("open");
@@ -132,7 +145,8 @@ const navLinks = [
       closeIcon.classList.add("hidden");
     };
 
-    toggle.addEventListener("click", () => {
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
       menu.classList.contains("open") ? close() : open();
     });
 
