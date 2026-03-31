@@ -9,7 +9,7 @@ import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import compress from "@playform/compress";
 import { defineConfig } from "astro/config";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import INConfig from "./config.js";
+import INConfig from "./config.ts";
 
 const integrations = [react(), tailwind({ applyBaseStyles: false })];
 
