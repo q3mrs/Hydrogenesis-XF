@@ -26,7 +26,7 @@ const config: Config = {
   server: {
     port: Number(process.env.PORT) || 8080,
     obfuscate: process.env.OBFUSCATE !== "false",
-    compress: process.env.COMPRESS !== "false",
+    compress: false,
   },
 
   auth: {
