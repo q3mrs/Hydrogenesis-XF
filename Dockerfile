@@ -12,3 +12,4 @@ RUN pnpm install
 COPY . .
 
 RUN pnpm build
+CMD ["node", "index.ts"]
