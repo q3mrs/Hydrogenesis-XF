@@ -474,13 +474,16 @@ self.addEventListener("fetch", (event) => {
   } else {
     app.use(handler);
   }
-  app.listen({ port }, (err, addr) => {
-    if (err) {
-      console.error("Server failed to start:", err);
-      process.exit(1);
-    }
-    console.log("Server listening on %s", addr);
-  });
+  app.listen({ 
+  port: Number(process.env.PORT) || 8080, 
+  host: '0.0.0.0' 
+}, (err, addr) => {
+  if (err) {
+    console.error("Server failed to start:", err);
+    process.exit(1);
+  }
+  console.log("Server listening on %s", addr);
+});
 }
 
 process.env.FIRST = process.env.FIRST || "true";
