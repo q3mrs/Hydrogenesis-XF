@@ -11,16 +11,12 @@ const initHome = () => {
 
   if (tagline) {
     const messages = [
-      "your tabs, your business.",
+      "youtube will be added soon.",
       "yeah it just works.",
       "fast enough for you?",
-      "school wifi who?",
+      "fuck fortinet",
       "panic button ready. just in case.",
-      "browse stuff. don't get caught.",
-      "it's giving... freedom.",
-      "lowkey the best proxy.",
-      "teachers hate this one trick.",
-      "you didn't get this from us.",
+      "browse stuff.",
     ];
     const pick = messages[Math.floor(Math.random() * messages.length)];
     tagline.textContent = pick;
