@@ -14,7 +14,7 @@ import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import { build } from "astro";
 import Fastify from "fastify";
 import INConfig from "./config.ts";
-import { generateMaps, getClientScript, type ObfuscationMaps, transformCss, transformHtml, transformJs, ROUTES, ASSET_FOLDERS } from "./src/lib/obfuscate";
+import { generateMaps, getClientScript, type ObfuscationMaps, transformCss, transformHtml, transformJs, ROUTES, ASSET_FOLDERS } from "./src/lib/obfuscate.ts";
 
 let obfuscationMaps: ObfuscationMaps | null = null;
 
